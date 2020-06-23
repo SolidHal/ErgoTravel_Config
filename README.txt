@@ -26,44 +26,43 @@ The color picker here works well: https://web.archive.org/web/20160125221210/htt
 The color function can be added by putting these around PROGMEM keymaps in keymap.c:
 
 +++ b/solidhal-normal-modifiers/keymap.c
-@@ -0,0 +1,40 @@
-+#include QMK_KEYBOARD_H
-+#ifdef RGBLIGHT_ENABLE
-+#include "rgblight.h"
-+#endif
-+
+#include QMK_KEYBOARD_H
+#ifdef RGBLIGHT_ENABLE
+#include "rgblight.h"
+#endif
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { yadayadayada }
 
-+
-+void matrix_scan_user(void) {
-+  #ifdef RGBLIGHT_ENABLE
-+
-+  static uint8_t old_layer = 255;
-+  uint8_t new_layer = biton32(layer_state);
-+
-+  if (old_layer != new_layer) {
-+    switch (new_layer) {
-+      case 0:
-+        rgblight_setrgb(102, 0, 102);
-+	//rgblight_setrgb(102, 0, 204);        
-+	break;
-+      case 1:
-+        rgblight_setrgb(0x00, 0xA0, 0xFF);
-+        break;
-+      case 2:
-+        rgblight_setrgb(0xFF, 0x00, 0x00);
-+        break;
-+      case 3:
-+        rgblight_setrgb(0xFF, 0x20, 0x00);
-+        break;
-+    }
-+
-+    old_layer = new_layer;
-+  }
-+
-+  #endif //RGBLIGHT_ENABLE
-+}
+
+void matrix_scan_user(void) {
+  #ifdef RGBLIGHT_ENABLE
+
+  static uint8_t old_layer = 255;
+  uint8_t new_layer = biton32(layer_state);
+
+  if (old_layer != new_layer) {
+    switch (new_layer) {
+      case 0:
+        rgblight_setrgb(102, 0, 102);
+	//rgblight_setrgb(102, 0, 204);        
+	break;
+      case 1:
+        rgblight_setrgb(0x00, 0xA0, 0xFF);
+        break;
+      case 2:
+        rgblight_setrgb(0xFF, 0x00, 0x00);
+        break;
+      case 3:
+        rgblight_setrgb(0xFF, 0x20, 0x00);
+        break;
+    }
+
+    old_layer = new_layer;
+  }
+
+  #endif //RGBLIGHT_ENABLE
+}
 
 
 
